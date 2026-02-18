@@ -1,0 +1,272 @@
+   /* Global Styles */
+        body {
+            background-color: rgba(138, 136, 136, 0.817);
+            margin: 0;
+           font-family: -apple-system, Inter, BlinkMacSystemFont, sans-serif;
+           font-weight: 400;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(0, 0, 0, 0.74);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logos img {
+            height: 55px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .cart {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-search {
+            display: flex;
+            gap: 8px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 5px 8px;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        a:hover {
+            color: blanchedalmond;
+            border-bottom: 2px solid blanchedalmond;
+        }
+
+        input[type="text"], input[type="button"] {
+            color: white;
+            border: 2px solid whitesmoke;
+            background-color: transparent;
+            padding: 6px 10px;
+            border-radius: 5px;
+        }
+
+        input[type="button"] {
+            color: #00ff00;
+            border-color: #00ff00;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+
+        /* Carousel */
+        .carousel-item { 
+            height: 65vh; 
+        }
+        .carousel-img { 
+            width: 100%; 
+            height: 65vh; 
+            object-fit: contain; 
+            background-color: #000; 
+        }
+        .carousel-imgs {
+             width: 100%; 
+             height: 65vh; 
+             object-fit: fill;
+             background-color: #000; 
+            }
+
+        .carousel-caption {
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            padding-bottom: 40px;
+        }
+
+        .caption-left { 
+            text-align: left; 
+            left: 5%; 
+            right: auto; 
+        }
+        .caption-center { 
+            text-align: center; 
+        }
+        .caption-right { 
+            text-align: right; 
+            right: 5%; 
+            left: auto; 
+        }
+
+        .carousel-caption h1 { 
+            font-size: clamp(1.8rem, 4vw, 3rem); 
+        }
+        .carousel-caption p { 
+            font-size: clamp(1rem, 2vw, 1.3rem); 
+        }
+
+        /* Product Section */
+        .product-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 20px;
+            justify-items: center;
+        }
+
+        .product-card {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-info button {
+    width: 100%;
+    max-width: 200px;
+}
+
+
+        .product-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 28px;
+            border: 2px solid #000;
+            background-color: #e0e0e0;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .product-info {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .product-info h3 {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .product-info p {
+            margin: 8px 0;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .product-info button {
+            background-color: #555555;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            min-width: 120px;           
+            transition: background-color 0.3s ease;
+        }
+
+        .product-info button:first-of-type {
+            background-color: #181a1b;  
+        }
+
+        .product-info button:hover {
+            background-color: white;
+            color: black;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+    footer {
+    background-color: rgba(0, 0, 0, 0.74);
+    color: white;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;               
+    justify-content: space-between;
+    align-items: center;           
+    gap: 20px;                     
+    max-width: 1200px;             
+    margin: 0 auto;                
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    margin: 0;
+    flex-shrink: 0;                  
+    text-align: left;
+}
+
+.footer-badges {
+    display: flex;
+    flex-wrap: wrap;                 
+    justify-content: flex-end;       
+    gap: 15px;
+    align-items: center;
+}
+
+.footer-badges img {
+    width: 105px;
+    height: 45px;
+    object-fit: contain;
+    background-color: transparent;
+}
+
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .footer-text {
+        text-align: center;
+    }
+    
+    .footer-badges {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .footer-badges img {
+        width: 120px;
+        height: 52px;
+    }
+    
+    
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-logos img { height: 48px; }
+    .product-info button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        min-width: 100px;
+    }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation -->
+        <nav>
+            <img src="Logo.png" alt="Logo">
+            <div>
+                <a href="index.php">Home</a>
+                <a href="admin.html">Admin</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div>
+                <input type="text" id="searchInput" placeholder="Search products...">
+                <input type="button" value="Search">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h2>Manage Inventory</h2>
+                <button id="addBtn">+ Add New Product</button>
+            </div>
+
+            <!-- Table Content -->
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Products -->
+                    <tr data-id="1">
+                        <td>1</td>
+                        <td><img src="Product1.png" alt=""></td>
+                        <td>iPhone 17 Pro Max</td>
+                        <td>₱108,990</td>
+                        <td>Smartphones</td>
+                        <td>50</td>
+                        <td class="actions">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr data-id="2">
+                        <td>2</td>
+                        <td><img src="Product2.png" alt=""></td>
+                        <td>iPhone 16 Pro</td>
+                        <td>₱76,990</td>
+                        <td>Smartphones</td>
+                        <td>75</td>
+                        <td class="actions">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr data-id="3">
+                        <td>3</td>
+                        <td><img src="Product3.png" alt=""></td>
+                        <td>iPhone 13</td>
+                        <td>₱32,619</td>
+                        <td>Smartphones</td>
+                        <td>100</td>
+                        <td class="actions">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Form -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Add New Product</h3>
+            <form id="productForm">
+                <input type="hidden" id="editId">
+                <input type="text" id="name" placeholder="Product Name" required>
+                <input type="number" id="price" placeholder="Price (e.g. ₱12,000)" required>
+                <input type="text" id="category" placeholder="Category" required>
+                <input type="number" id="stock" placeholder="Stock Quantity" required>
+                <input type="file" id="image" accept="image/*">
+                <div class="form-actions">
+                    <button type="submit">Save</button>
+                    <button type="button" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; All Rights Reserved 2025</p>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e4e4e4;
+    color: #333;
+}
+
+/* NAVIGATION BAR */
+nav {
+    background-color:  rgba(255, 255, 255, 0.781);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+nav img {
+    height: 55px;
+}
+
+/* Navigation links */
+nav a {
+    color: black;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+nav a:hover {
+    color: blanchedalmond;
+    border-bottom: 2px solid blanchedalmond;
+}
+
+/* Search bar */
+nav input {
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+}
+
+nav input[type="button"] {
+    border-color: lime;
+    color: lime;
+    cursor: pointer;
+}
+
+/* TABLE CONTAINER */
+.table-container {
+    width: 100%;
+    margin: 40px auto;
+    background: white;
+    border-radius: 10px;
+}
+
+/* Header above table */
+.table-header {
+    background: #181a1b;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Add button */
+#addBtn {
+    background: lime;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* TABLE STYLES */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f0f0f0;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Product images */
+td img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* ACTION BUTTONS */
+.actions button {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5%;
+}
+
+/* Edit button */
+.actions .edit {
+    background: #181a1b;
+    color: white;
+}
+
+/* Delete button */
+.actions .delete {
+    background: #d32f2f;
+    color: white;
+}
+
+/* FOOTER */
+footer {
+    background: #000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
