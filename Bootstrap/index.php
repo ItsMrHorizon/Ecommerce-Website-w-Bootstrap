@@ -26,14 +26,6 @@
             <a href="admin.html">Admin</a>
             <a href="#">Contact Us</a>
         </div>
-
-        <div class="nav-search">
-            <input type="text" placeholder="Search">
-            <input type="button" value="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-cart" viewBox="0 0 16 16" value="cart">
-  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-</svg>
-        </div>
     </nav>
 </header>
 
@@ -86,29 +78,36 @@
 
     <!-- Product Section -->
     <section class="product-section">
-        <!-- Database -->
-   <?php
-include 'IndexDB.php';
+        <?php
+        include 'IndexDB.php';
 
-$stmt = $pdo->query("SELECT * FROM products ORDER BY product_id");
-while ($row = $stmt->fetch()) {
-    ?>
-    <div class="product-card">
-        <div class="product-image">
-            <img src="data:image/jpeg;base64,<?= base64_encode($row['product_img']) ?>" 
-                 alt="<?= htmlspecialchars($row['product_name']) ?>">
-        </div>
-        <div class="product-info">
-            <h3><?= htmlspecialchars($row['product_name']) ?></h3>
-            <p class="price">₱<?= number_format($row['product_price']) ?></p>
-            <button class="buy-now">Buy Now</button>
-            <button class="add-cart">Add to cart</button>
-        </div>
-    </div>
-    <?php
-}
-?>
-</section>
+        $stmt = $pdo->query("SELECT * FROM products ORDER BY product_id");
+        while ($row = $stmt->fetch()) {
+            $imagePath = "images/" . htmlspecialchars($row['product_img']);
+            ?>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="<?= $imagePath ?>" 
+                         alt="<?= htmlspecialchars($row['product_name']) ?>">
+                </div>
+                <div class="product-info">
+                    <h3><?= htmlspecialchars($row['product_name']) ?></h3>
+                    <p class="price">₱<?= number_format($row['product_price'], 2) ?></p>
+                    
+                    <button class="buy-now btn btn-primary w-100"
+                            data-id="<?= $row['product_id'] ?>"
+                            data-name="<?= htmlspecialchars($row['product_name']) ?>"
+                            data-price="<?= $row['product_price'] ?>"
+                            data-stocks="<?= $row['product_stocks'] ?>"
+                            data-image="<?= $imagePath ?>">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+    </section>
 </main>
 
 <footer>
@@ -125,6 +124,118 @@ while ($row = $stmt->fetch()) {
     </div>
 </footer>
 
+<!-- Buy Now Modal - Apple Style -->
+<div class="modal fade" id="buyNowModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Purchase</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="buyNowForm" method="POST" action="buy.php">
+                    <div class="row g-5">
+                        <!-- Image Column -->
+                        <div class="col-md-5">
+                            <div class="img-container">
+                                <img id="modalProductImg" src="" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <!-- Details Column -->
+                        <div class="col-md-7">
+                            <h3 id="modalProductName" class="fw-semibold mb-2"></h3>
+                            <div class="product-price">₱<span id="modalProductPrice"></span></div>
+                            
+                            <input type="hidden" name="product_id" id="modalProductId">
+                            <input type="hidden" name="product_name" id="modalProductNameHidden">
+                            <input type="hidden" name="product_price" id="modalProductPriceHidden">
+                            <input type="hidden" name="product_stocks" id="modalProductStocksHidden">
+
+                            <div class="mb-4">
+                                <span class="badge bg-success rounded-pill px-3 py-2 fs-6">In Stock: <span id="modalProductStocks"></span></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" name="quantity" id="modalQuantity" 
+                                       class="form-control" value="1" min="1" oninput="updateTotal()">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" name="customer_name" id="modalName" 
+                                       class="form-control" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="total-section">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-muted fs-5">Total Amount</span>
+                                    <span class="fs-2 fw-semibold">₱<span id="modalTotalAmount">0.00</span></span>
+                                    <input type="hidden" name="total_amount" id="modalTotalAmountHidden">
+                                </div>
+                                <button type="submit" class="confirm-order-btn">Confirm Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const buyModal = new bootstrap.Modal(document.getElementById('buyNowModal'));
+
+    document.querySelectorAll('.buy-now').forEach(button => {
+        button.addEventListener('click', function() {
+            const id     = this.dataset.id;
+            const name   = this.dataset.name;
+            const price  = parseFloat(this.dataset.price);
+            const stocks = parseInt(this.dataset.stocks);
+            const image  = this.dataset.image;
+
+            document.getElementById('modalProductId').value = id;
+            document.getElementById('modalProductName').textContent = name;
+            document.getElementById('modalProductNameHidden').value = name;
+            document.getElementById('modalProductImg').src = image;
+            document.getElementById('modalProductPrice').textContent = price.toLocaleString('en-PH', {minimumFractionDigits: 2});
+            document.getElementById('modalProductPriceHidden').value = price;
+            document.getElementById('modalProductStocks').textContent = stocks;
+            document.getElementById('modalProductStocksHidden').value = stocks;
+
+            const qtyInput = document.getElementById('modalQuantity');
+            qtyInput.value = 1;
+            qtyInput.max = stocks;
+
+            document.getElementById('modalName').value = '';
+
+            updateTotal();
+            buyModal.show();
+        });
+    });
+});
+
+function updateTotal() {
+    let quantity = parseInt(document.getElementById('modalQuantity').value) || 1;
+    const maxStock = parseInt(document.getElementById('modalQuantity').max) || 999;
+    
+    if (quantity > maxStock) quantity = maxStock;
+    if (quantity < 1) quantity = 1;
+    document.getElementById('modalQuantity').value = quantity;
+
+    const price = parseFloat(document.getElementById('modalProductPriceHidden').value) || 0;
+    const total = quantity * price;
+
+    const formattedTotal = total.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+    document.getElementById('modalTotalAmount').textContent = formattedTotal;
+    document.getElementById('modalTotalAmountHidden').value = total.toFixed(2);
+}
+</script>
 </body>
 </html>
