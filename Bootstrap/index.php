@@ -23,8 +23,8 @@
 
         <div class="nav-links">
             <a href="index.php">Home</a>
-            <a href="admin.html">Admin</a>
-            <a href="#">Contact Us</a>
+            <a href="admin.php">Admin</a>
+            <a href="contact.html">Contact Us</a>
         </div>
     </nav>
 </header>
@@ -127,7 +127,11 @@
 <!-- Buy Now Modal - Apple Style -->
 <div class="modal fade" id="buyNowModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" style="position:relative;">
+            
+            <!-- Large X close button -->
+            <span class="modal-close-x" onclick="closeBuyModal()">×</span>
+
             <div class="modal-header">
                 <h5 class="modal-title">Confirm Purchase</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -188,8 +192,10 @@
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+let buyModalInstance; // Global variable for modal instance
+
 document.addEventListener('DOMContentLoaded', function() {
-    const buyModal = new bootstrap.Modal(document.getElementById('buyNowModal'));
+    buyModalInstance = new bootstrap.Modal(document.getElementById('buyNowModal'));
 
     document.querySelectorAll('.buy-now').forEach(button => {
         button.addEventListener('click', function() {
@@ -215,10 +221,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('modalName').value = '';
 
             updateTotal();
-            buyModal.show();
+            buyModalInstance.show();
         });
     });
 });
+
+function closeBuyModal() {
+    buyModalInstance.hide();
+}
 
 function updateTotal() {
     let quantity = parseInt(document.getElementById('modalQuantity').value) || 1;

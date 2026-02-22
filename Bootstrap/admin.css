@@ -1,177 +1,182 @@
-body {
-    margin: 0;
-    font-family: -apple-system, Inter, BlinkMacSystemFont, sans-serif;
-    background-color: rgba(138, 136, 136, 0.817);
-    color: #333;
-}
+ * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 15px 30px;
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-content img { height: 42px; }
+        .nav-links a {
+            color: #1d1d1f;
+            font-weight: 500;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .nav-links a:hover { color: #0071e3; }
 
-nav {
-    background-color: rgba(0, 0, 0, 0.74);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            overflow: hidden;
+            flex: 1;
+        }
+        .page-header {
+            background: #f5f5f7;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .page-header h1 { margin: 0; font-size: 28px; color: #1d1d1f; font-weight: 600; }
+        #addBtn {
+            background: #00c853;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
 
-nav img { 
-    height: 55px; 
-}
-nav a { 
-    color: white; 
-    text-decoration: none; 
-    padding: 5px 8px; 
-}
-nav a:hover { 
-    color: blanchedalmond; 
-    border-bottom: 2px solid blanchedalmond; 
-}
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 2px solid #e5e5e5;
+        }
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        img.product-img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .actions button {
+            padding: 8px 18px;
+            margin-right: 8px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .edit   { background: #1d1d1f; color: white; }
+        .delete { background: #ff3b30; color: white; }
 
-nav input[type="text"], nav input[type="button"] {
-    padding: 6px 10px;
-    border: 2px solid whitesmoke;
-    border-radius: 5px;
-    background: transparent;
-    color: white;
-}
-nav input[type="button"] { 
-    border-color: #00ff00; 
-    color: #00ff00; 
-    cursor: pointer; 
-}
-nav input[type="button"]:hover { 
-    background: rgba(0,255,0,0.1); 
-}
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 14px 25px;
+            margin: 20px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
 
-.table-container {
-    max-width: 1300px;
-    margin: 40px auto;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
+        /* Improved Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.55);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 14px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            padding: 35px;
+        }
+        .modal-content h3 {
+            margin: 0 0 25px 0;
+            font-size: 24px;
+            color: #1d1d1f;
+        }
+        .modal-content label {
+            display: block;
+            margin: 15px 0 6px;
+            font-weight: 600;
+            color: #333;
+        }
+        .modal-content input[type="text"],
+        .modal-content input[type="number"],
+        .modal-content input[type="file"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+        .modal-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+        }
+        .modal-actions button {
+            flex: 1;
+            padding: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .modal-actions .save { 
+            background: #1d1d1f; 
+            color: white; 
+        }
+        .modal-actions .cancel { 
+            background: #f0f0f0; 
+            color: #333; 
+        }
 
-.table-header {
-    padding: 20px;
-    background: #181a1b;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        footer {
+            background: white;
+            /* Flipped the shadow to -2px so it casts upwards */
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08); 
+            padding: 15px 30px; /* Matched nav padding */
+            margin-top: auto; /* Keeps it pushed to the bottom of the screen */
+        }
 
-#addBtn {
-    background: #00ff00;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-    background: #f0f0f0;
-    padding: 15px;
-    text-align: left;
-    font-weight: 600;
-}
-
-td {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-td img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.actions button {
-    padding: 6px 12px;
-    margin: 0 4px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.actions .edit   { 
-    background: #181a1b; 
-    color: white; 
-}
-.actions .delete {
-     background: #d32f2f; 
-     color: white; 
-    }
-
-.actions button:hover { 
-    opacity: 0.8; 
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-}
-
-.modal-content input {
-    width: 95%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    background: transparent;
-}
-
-.form-actions button {
-    padding: 10px 20px;
-    margin: 10px 5px 0;
-    border: none;
-    background-color: #555555;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.form-actions button:hover {
-    background-color: #555555;
-    color: white;
-}
-
-.form-actions button[type="submit"] {
-    background: #181a1b;
-    color: white;
-}
-
-#cancelBtn {
-    background: #555;
-    color: white;
-}
-
-footer {
-    background-color: rgba(0, 0, 0, 0.74);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-}
+        /* Optional: Use this class inside your <footer> to match the nav's inner width and alignment */
+        .footer-content {
+            max-width: 1200px; /* Matches .nav-content */
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers the text instead of pushing it to the left */
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 500;
+        }
